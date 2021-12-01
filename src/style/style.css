@@ -5,6 +5,10 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -18,4 +22,19 @@ body {
 
 .logo {
   margin-left: 48px;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  padding: 16px 0;
 }
