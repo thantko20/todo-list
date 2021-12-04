@@ -26,6 +26,19 @@ body {
 
 .wrapper {
   flex: 1;
+  display: flex;
+}
+
+.tabs-wrapper {
+  flex-shrink: 0;
+
+  background-color: #afafaf;
+  width: 400px;
+}
+
+.tasks-wrapper {
+  flex: 1;
+  background-color: rgb(246, 198, 134);
 }
 
 footer {
