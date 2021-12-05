@@ -19,7 +19,7 @@ class ProjectManager {
     project.tasks.splice(taskId, 1);
   }
 
-  removeProject(projectId) {
+  removeProject(projectId, myProjects) {
     myProjects.splice(projectId, 1);
   }
 }
