@@ -7,6 +7,10 @@ class ProjectManager {
     return new Project(name);
   }
 
+  editProjectName(project, name) {
+    project.name = name;
+  }
+
   addTask(project, task) {
     project.tasks.push(task);
   }
