@@ -63,8 +63,9 @@ body {
   flex-grow: 4;
   text-align: center;
   padding: 12px 0 12px 0;
-  background-color: rgb(133, 248, 248);
+  background-color: rgb(216, 216, 250);
   font-weight: bold;
+  overflow: hidden;
 }
 
 .project-name:hover {
@@ -83,7 +84,7 @@ body {
 }
 
 .edit-project:hover {
-  background-color: rgb(253, 255, 140);
+  background-color: rgb(171, 170, 255);
 }
 
 .delete-btn {
@@ -92,8 +93,16 @@ body {
   cursor: pointer;
 }
 
-.delete-btn:hover {
+.delete-btn:hover, .exit-btn:hover {
   transform: scale(1.3);
+}
+
+.save {
+  margin-left: 6px;
+}
+
+img {
+  pointer-events: none;
 }
 
 .add-project-btn {
@@ -111,7 +120,32 @@ body {
 
 .tasks-wrapper {
   flex: 1;
-  background-color: rgb(246, 198, 134);
+  background-color: rgb(227, 221, 255);
+}
+
+.modal {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 360px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  background-color: rgb(171, 170, 255);
+  border: 1px solid #000;
+}
+
+.project-modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exit-btn {
+  background-color: transparent;
+  cursor: pointer;
 }
 
 footer {

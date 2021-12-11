@@ -26,6 +26,77 @@ const elementsModels = {
 
     return projectTab;
   },
+
+  addProjectModal() {
+    const projectModal = document.createElement('form');
+    projectModal.setAttribute('action', '#');
+    projectModal.classList.add('modal');
+
+    const projectModalHeader = document.createElement('div');
+    projectModalHeader.classList.add('project-modal-header');
+
+    const headerText = document.createElement('div');
+    headerText.textContent = 'Enter Project Name';
+
+    const exitBtn = document.createElement('button');
+    exitBtn.classList.add('exit-btn');
+    exitBtn.innerHTML = '&times;';
+
+    projectModalHeader.append(headerText, exitBtn);
+
+    const inputPart = document.createElement('div');
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'project name...';
+    input.classList.add('project-name-input');
+
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'submit';
+    saveBtn.classList.add('save', 'save-project');
+    saveBtn.textContent = 'Save';
+
+    inputPart.append(input, saveBtn);
+
+    projectModal.append(projectModalHeader, inputPart);
+
+    return projectModal;
+  },
+  editProjectModal(inputText) {
+    const projectModal = document.createElement('form');
+    projectModal.setAttribute('action', '#');
+    projectModal.classList.add('modal');
+
+    const projectModalHeader = document.createElement('div');
+    projectModalHeader.classList.add('project-modal-header');
+
+    const headerText = document.createElement('div');
+    headerText.textContent = 'Enter Project Name';
+
+    const exitBtn = document.createElement('button');
+    exitBtn.classList.add('exit-btn');
+    exitBtn.innerHTML = '&times;';
+
+    projectModalHeader.append(headerText, exitBtn);
+
+    const inputPart = document.createElement('div');
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = inputText;
+    input.classList.add('project-name-input');
+
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'submit';
+    saveBtn.classList.add('save', 'edit-name');
+    saveBtn.textContent = 'Save';
+
+    inputPart.append(input, saveBtn);
+
+    projectModal.append(projectModalHeader, inputPart);
+
+    return projectModal;
+  }
 }
 
 export default elementsModels;
