@@ -138,6 +138,10 @@ img {
   pointer-events: none;
 }
 
+.svg-icons {
+  width: 16px;
+}
+
 .add-project-btn, .add-task-btn {
   align-self: center;
   padding: 8px 12px;

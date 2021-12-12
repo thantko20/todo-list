@@ -37,6 +37,16 @@ class DisplayController {
       projectsWrapper.appendChild(elementsModels.projectTabModel(project.name, projects.indexOf(project)));
     });
   }
+
+  renderTasks(project) {
+    const tasksContainer = document.querySelector('.tasks-container');
+    const tasks = project.tasks;
+
+    this.clearChildrenNodes(tasksContainer);
+    tasks.forEach(task => {
+      tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)))
+    })
+  }
 }
 
 export default DisplayController;

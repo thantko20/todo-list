@@ -13,7 +13,21 @@ const mainProgram = (function() {
   let currentProjectId = 0;
   let projectIdBeingEdited = null;
 
+  myProjects.push(projectManager.createProject('test'));
+  
+  let taskProperties = {
+    title: 'fjdlkas',
+    description: 'dfsadfahg',
+    dueDate: '12/12/2021',
+    priority: 'High',
+    finishedStatus: false,
+  }
+
+  let task = taskManager.createTask(taskProperties);
+  projectManager.addTask(myProjects[0], task);
+
   displayController.renderProjectTabs(myProjects);
+  displayController.renderTasks(myProjects[0]);
 
   listenEvents();
 

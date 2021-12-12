@@ -1,4 +1,5 @@
 import DeleteIcon from '../assets/recycle-bin.png';
+import ExpandIcon from '../assets/expand-icon.svg'
 
 const elementsModels = {
   projectTabModel(name, projectId) {
@@ -18,6 +19,7 @@ const elementsModels = {
     deleteProjectBtn.classList.add('delete-btn', 'delete-project-btn');
 
     const binIcon = new Image();
+    binIcon.classList.add('svg-icons');
     binIcon.src = DeleteIcon;
 
     deleteProjectBtn.appendChild(binIcon);
@@ -27,6 +29,40 @@ const elementsModels = {
     return projectTab;
   },
 
+  taskModel(task, taskId) {
+    const taskElement = document.createElement('div');
+    taskElement.classList.add('task');
+    taskElement.setAttribute('data-task-index', taskId);
+    
+    const finishedStatus = document.createElement('input');
+    finishedStatus.type = 'checkbox';
+    finishedStatus.checked = task.finishedStatus;
+    finishedStatus.classList.add('finished-status');
+
+    const title = document.createElement('div');
+    title.textContent = task.title;
+    title.classList.add('title');
+
+    const priority = document.createElement('div');
+    priority.classList.add('priority', task.priority);
+    priority.textContent = task.priority;
+
+    const dueDate = document.createElement('div');
+    dueDate.classList.add('due-date');
+    dueDate.textContent = task.dueDate;
+
+    const expandIcon = new Image();
+    expandIcon.src = ExpandIcon;
+    expandIcon.classList.add('svg-icons');
+
+    const expandButton = document.createElement('button');
+    expandButton.appendChild(expandIcon);
+
+    taskElement.append(finishedStatus, title, priority, dueDate, expandButton);
+
+    return taskElement;
+  },
+  
   addProjectModal() {
     const projectModal = document.createElement('form');
     projectModal.setAttribute('action', '#');
@@ -62,6 +98,7 @@ const elementsModels = {
 
     return projectModal;
   },
+
   editProjectModal(inputText) {
     const projectModal = document.createElement('form');
     projectModal.setAttribute('action', '#');
@@ -71,7 +108,7 @@ const elementsModels = {
     projectModalHeader.classList.add('project-modal-header');
 
     const headerText = document.createElement('div');
-    headerText.textContent = 'Enter Project Name';
+    headerText.textContent = 'Edit Project Name';
 
     const exitBtn = document.createElement('button');
     exitBtn.classList.add('exit-btn');
@@ -89,7 +126,7 @@ const elementsModels = {
     const saveBtn = document.createElement('button');
     saveBtn.type = 'submit';
     saveBtn.classList.add('save', 'edit-name');
-    saveBtn.textContent = 'Save';
+    saveBtn.textContent = 'Save Changes';
 
     inputPart.append(input, saveBtn);
 
