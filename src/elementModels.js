@@ -1,4 +1,4 @@
-import DeleteIcon from './assets/recycle-bin.png';
+import DeleteIcon from '../assets/recycle-bin.png';
 
 const elementsModels = {
   projectTabModel(name, projectId) {

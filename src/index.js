@@ -45,7 +45,6 @@ const mainProgram = (function() {
   }
 
   function triggerEditProjectBtn(e) {
-    // Pop up edit modal with default input value
     const targetParent = e.target.parentNode;
 
     projectIdBeingEdited = getProjectId(targetParent);
