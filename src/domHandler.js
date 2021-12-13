@@ -23,27 +23,21 @@ const DOMHandler = (function() {
   let task = TaskManager.createTask(taskProperties);
   ProjectManager.addTask(0, task);
 
-  const init = function initApp() {
-    DisplayController.renderProjectTabs(myProjects);
-    DisplayController.renderTasks(myProjects[currentProjectId]);
-    listenEvents();
-  }
-
-  function triggerAddProjectBtn() {
+  const triggerAddProjectBtn = function () {
     DisplayController.popUpProjectModal();
   }
 
-  function triggerDelProjectBtn(e) {
+  const triggerDelProjectBtn = function (e) {
     const projectId = e.target.parentNode.getAttribute('data-project-index');
     ProjectManager.removeProject(projectId);
     DisplayController.renderProjectTabs(myProjects);
   }
 
-  function triggerExitBtn() {
+  const triggerExitBtn = function () {
     DisplayController.exitModal();
   }
 
-  function triggerSaveProjectBtn(e) {
+  const triggerSaveProjectBtn = function (e) {
     e.preventDefault();
     const input = document.querySelector('.project-name-input');
     const projectName = input.value;
@@ -56,14 +50,14 @@ const DOMHandler = (function() {
     DisplayController.renderProjectTabs(myProjects);
   }
 
-  function triggerEditProjectBtn(e) {
+  const triggerEditProjectBtn = function (e) {
     const targetParent = e.target.parentNode;
 
     projectIdBeingEdited = getProjectId(targetParent);
     DisplayController.popUpEditProjectModal(myProjects[projectIdBeingEdited].name);
   }
 
-  function triggerChangeNameBtn(e) {
+  const triggerChangeNameBtn = function (e) {
     const input = document.querySelector('.project-name-input');
     const text = input.value;
     ProjectManager.editProjectName(projectIdBeingEdited, text);
@@ -71,11 +65,11 @@ const DOMHandler = (function() {
     DisplayController.renderProjectTabs(myProjects);
   }
 
-  function getProjectId(target) {
+  const getProjectId = function (target) {
     return target.getAttribute('data-project-index');
   }
 
-  function listenEvents() {
+  const listenEvents = function () {
     const addProjectBtn = document.querySelector('.add-project-btn');
 
     document.addEventListener('click', (e) => {
@@ -92,6 +86,12 @@ const DOMHandler = (function() {
     })
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
+  }
+
+  const init = function initApp() {
+    DisplayController.renderProjectTabs(myProjects);
+    DisplayController.renderTasks(myProjects[currentProjectId]);
+    listenEvents();
   }
 
   return { init }
