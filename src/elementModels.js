@@ -42,6 +42,7 @@ const elementsModels = {
     const title = document.createElement('div');
     title.textContent = task.title;
     title.classList.add('title');
+    task.finishedStatus ? title.classList.add('strikethrough') : title.classList.remove('strikethrough');
 
     const priority = document.createElement('div');
     priority.classList.add('priority', task.priority);
@@ -53,9 +54,10 @@ const elementsModels = {
 
     const expandIcon = new Image();
     expandIcon.src = ExpandIcon;
-    expandIcon.classList.add('svg-icons');
+    expandIcon.classList.add('svg-icons', 'expand-icon');
 
     const expandButton = document.createElement('button');
+    expandButton.classList.add('expand-btn');
     expandButton.appendChild(expandIcon);
 
     taskElement.append(finishedStatus, title, priority, dueDate, expandButton);

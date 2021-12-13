@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+:root {
+  --darkened-color: rgb(149, 225, 255);
+  --pale-color: rgb(215, 241, 251);
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -41,7 +46,7 @@ body {
 
 .tasks-wrapper {
   flex: 1;
-  background-color: rgb(227, 221, 255);
+  background-color: var(--pale-color);
 
   display: flex;
   flex-direction: column;
@@ -83,12 +88,26 @@ body {
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.13);
 
   display: grid;
-  grid-template-columns: 5% auto 20% 20% 10%;
+  grid-template-columns: 5% auto 20% 20% 5%;
   align-items: center;
+}
+
+.expand-btn {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.expand-icon:hover {
+  color: red;
 }
 
 .task > div {
   direction: ltr;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: grey;
 }
 
 .project-name {
@@ -96,7 +115,7 @@ body {
   flex-grow: 4;
   text-align: center;
   padding: 12px 0 12px 0;
-  background-color: rgb(216, 216, 250);
+  background-color: var(--pale-color);
   font-weight: bold;
   overflow: hidden;
 }
@@ -117,7 +136,7 @@ body {
 }
 
 .edit-project:hover {
-  background-color: rgb(171, 170, 255);
+  background-color: var(--darkened-color)
 }
 
 .delete-btn {
@@ -170,7 +189,7 @@ img {
   flex-direction: column;
   gap: 12px;
 
-  background-color: rgb(171, 170, 255);
+  background-color: var(--darkened-color);
   border: 1px solid #000;
 }
 
