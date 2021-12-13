@@ -37,7 +37,7 @@ const DisplayController = (function() {
     });
   }
 
-  const renderTasks = function (project) {
+  const renderTasks = function renderTasksOfCurrentProject (project) {
     const tasksContainer = document.querySelector('.tasks-container');
     const tasks = project.tasks;
 
