@@ -1,52 +1,61 @@
 import elementsModels from "./elementModels";
 
-class DisplayController {
-  constructor() {}
+const DisplayController = (function() {
 
-  clearChildrenNodes(parentNode) {
+  const clearChildNodes = function clearChildNodesFromParentNode(parentNode) {
     while(parentNode.firstChild) parentNode.removeChild(parentNode.firstChild);
   }
 
-  popUpProjectModal() {
-    if(this.checkExistingModal()) return;
+  const checkExistingModal = function checkExistingModalInWindow() {
+    const modal = document.querySelector('.modal');
+    if(modal) return true;
+  }
+
+  const popUpProjectModal = function () {
+    if(checkExistingModal()) return;
     const body = document.body;
     body.appendChild(elementsModels.addProjectModal());
   }
 
-  popUpEditProjectModal(inputText) {
-    if(this.checkExistingModal()) return;
+  const popUpEditProjectModal = function (inputText) {
+    if(checkExistingModal()) return;
 
     const body = document.body;
     body.appendChild(elementsModels.editProjectModal(inputText));
   }
 
-  exitModal() {
+  const exitModal = function () {
     const child = document.querySelector('.modal');
     child.remove();
   }
 
-  checkExistingModal() {
-    const modal = document.querySelector('.modal');
-    if(modal) return true;
-  }
-
-  renderProjectTabs(projects) {
+  const renderProjectTabs = function (projects) {
     const projectsWrapper = document.querySelector('.projects-wrapper');
-    this.clearChildrenNodes(projectsWrapper);
+    clearChildNodes(projectsWrapper);
     projects.forEach(project => {
       projectsWrapper.appendChild(elementsModels.projectTabModel(project.name, projects.indexOf(project)));
     });
   }
 
-  renderTasks(project) {
+  const renderTasks = function (project) {
     const tasksContainer = document.querySelector('.tasks-container');
     const tasks = project.tasks;
 
-    this.clearChildrenNodes(tasksContainer);
+    clearChildnNodes(tasksContainer);
     tasks.forEach(task => {
       tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)))
     })
   }
-}
+
+  return {
+    clearChildNodes,
+    checkExistingModal,
+    popUpEditProjectModal,
+    popUpProjectModal,
+    exitModal,
+    renderProjectTabs,
+    renderTasks
+  }
+})();
 
 export default DisplayController;
