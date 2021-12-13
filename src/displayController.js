@@ -41,7 +41,7 @@ const DisplayController = (function() {
     const tasksContainer = document.querySelector('.tasks-container');
     const tasks = project.tasks;
 
-    clearChildnNodes(tasksContainer);
+    clearChildNodes(tasksContainer);
     tasks.forEach(task => {
       tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)))
     })
