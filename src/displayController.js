@@ -43,7 +43,17 @@ const DisplayController = (function() {
 
     clearChildNodes(tasksContainer);
     tasks.forEach(task => {
-      tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)))
+      tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)));
+    })
+  }
+
+  const toggleProjectTab = function toggleCurrentProjectTabStyle (projectId) {
+    const projects = document.querySelectorAll('.project-name');
+
+    projects.forEach(project => {
+      const projectIndex = project.parentNode.getAttribute('data-project-index');
+
+      projectId == projectIndex ? project.classList.add('active-project') : project.classList.remove('active-project');
     })
   }
 
@@ -54,7 +64,8 @@ const DisplayController = (function() {
     popUpProjectModal,
     exitModal,
     renderProjectTabs,
-    renderTasks
+    renderTasks,
+    toggleProjectTab
   }
 })();
 

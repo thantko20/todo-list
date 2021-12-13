@@ -9,6 +9,7 @@ const DOMHandler = (function() {
 
   let currentProjectId = 0;
   let projectIdBeingEdited = null;
+  let taskIdBeingEdited = null;
 
   ProjectManager.addProject(ProjectManager.createProject('text'));
   
@@ -21,6 +22,9 @@ const DOMHandler = (function() {
   }
 
   let task = TaskManager.createTask(taskProperties);
+  ProjectManager.addTask(0, task);
+  ProjectManager.addTask(0, task);
+  ProjectManager.addTask(0, task);
   ProjectManager.addTask(0, task);
 
   const triggerAddProjectBtn = function () {
@@ -65,6 +69,14 @@ const DOMHandler = (function() {
     DisplayController.renderProjectTabs(myProjects);
   }
 
+  const triggerSelectedProject = function (e) {
+    const projectTab = e.target.parentNode;
+    currentProjectId = getProjectId(projectTab);
+
+    DisplayController.renderTasks(myProjects[currentProjectId]);
+    DisplayController.toggleProjectTab(currentProjectId);
+  }
+
   const getProjectId = function (target) {
     return target.getAttribute('data-project-index');
   }
@@ -83,6 +95,8 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('save-project')) triggerSaveProjectBtn(e);
 
       else if(targetClasslist.contains('edit-name')) triggerChangeNameBtn(e);
+
+      else if(targetClasslist.contains('project-name')) triggerSelectedProject(e);
     })
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
