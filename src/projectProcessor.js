@@ -1,27 +1,45 @@
 import Project from "./project";
 
-class ProjectManager {
-  constructor() {}
+const ProjectManager = (function() {
+  let myProjects = [];
 
-  createProject(name) {
+  const getProjects = function getMyProjects() {
+    return myProjects;
+  }
+
+  const createProject = function (name) {
     return new Project(name);
   }
 
-  editProjectName(project, name) {
-    project.name = name;
+  const addProject = function addProjectToMyProjects(project) {
+    myProjects.push(project);
   }
 
-  addTask(project, task) {
-    project.tasks.push(task);
+  const editProjectName = function (projectId, name) {
+    myProjects[projectId].name = name;
   }
 
-  removeTask(project, taskId) {
+  const addTask = function (projectId, task) {
+    myProjects[projectId].tasks.push(task);
+  }
+
+  const removeTask = function (projectId, taskId) {
     project.tasks.splice(taskId, 1);
   }
 
-  removeProject(projectId, myProjects) {
+  const removeProject = function (projectId) {
     myProjects.splice(projectId, 1);
   }
-}
+
+  return {
+    getProjects,
+    createProject,
+    addProject,
+    editProjectName,
+    addTask,
+    removeTask,
+    removeProject
+  }
+})();
 
 export default ProjectManager;
