@@ -44,7 +44,6 @@ const DOMHandler = (function() {
 
   const triggerSaveProjectBtn = function (form) {
     const projectName = form.pname.value;
-    console.log(projectName)
 
     DisplayController.exitModal();
     ProjectManager.addProject(ProjectManager.createProject(projectName));
@@ -58,10 +57,10 @@ const DOMHandler = (function() {
     DisplayController.popUpEditProjectModal(myProjects[projectIdBeingEdited].name);
   }
 
-  const triggerChangeNameBtn = function (e) {
-    const input = document.querySelector('.project-name-input');
-    const text = input.value;
-    ProjectManager.editProjectName(projectIdBeingEdited, text);
+  const triggerChangeNameBtn = function (form) {
+    const projectName = form.pname.value;
+
+    ProjectManager.editProjectName(projectIdBeingEdited, projectName);
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
   }
@@ -94,8 +93,6 @@ const DOMHandler = (function() {
 
       else if(targetClasslist.contains('exit-btn')) triggerExitBtn();
 
-      else if(targetClasslist.contains('edit-name')) triggerChangeNameBtn(e);
-
       else if(targetClasslist.contains('project-name')) triggerSelectedProject(e);
     })
 
@@ -104,6 +101,8 @@ const DOMHandler = (function() {
       const targetClasslist = e.target.classList;
 
       if(targetClasslist.contains('add-project-modal')) triggerSaveProjectBtn(e.target);
+
+      else if(targetClasslist.contains('edit-project-modal')) triggerChangeNameBtn(e.target);
     });
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);

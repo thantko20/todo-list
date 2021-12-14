@@ -106,7 +106,7 @@ const elementsModels = {
   editProjectModal(inputText) {
     const projectModal = document.createElement('form');
     projectModal.setAttribute('action', '#');
-    projectModal.classList.add('modal');
+    projectModal.classList.add('modal', 'edit-project-modal');
 
     const projectModalHeader = document.createElement('div');
     projectModalHeader.classList.add('modal-header');
@@ -126,6 +126,8 @@ const elementsModels = {
     input.type = 'text';
     input.value = inputText;
     input.classList.add('project-name-input');
+    input.name = 'pname';
+    input.required = true;
 
     const saveBtn = document.createElement('button');
     saveBtn.type = 'submit';
