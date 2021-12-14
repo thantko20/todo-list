@@ -33,8 +33,9 @@ const DOMHandler = (function() {
 
   const triggerDelProjectBtn = function (e) {
     const projectId = e.target.parentNode.getAttribute('data-project-index');
+    if(projectId == currentProjectId) currentProjectId = 0;
     ProjectManager.removeProject(projectId);
-    DisplayController.renderProjectTabs(myProjects);
+    DisplayController.render(myProjects, currentProjectId);
   }
 
   const triggerExitBtn = function () {
@@ -51,7 +52,7 @@ const DOMHandler = (function() {
     }
     DisplayController.exitModal();
     ProjectManager.addProject(ProjectManager.createProject(projectName));
-    DisplayController.renderProjectTabs(myProjects);
+    DisplayController.render(myProjects, currentProjectId);
   }
 
   const triggerEditProjectBtn = function (e) {
@@ -66,7 +67,7 @@ const DOMHandler = (function() {
     const text = input.value;
     ProjectManager.editProjectName(projectIdBeingEdited, text);
     DisplayController.exitModal();
-    DisplayController.renderProjectTabs(myProjects);
+    DisplayController.render(myProjects, currentProjectId);
   }
 
   const triggerSelectedProject = function (e) {
@@ -77,12 +78,17 @@ const DOMHandler = (function() {
     DisplayController.toggleProjectTab(currentProjectId);
   }
 
+  const triggerAddTaskBtn = function () {
+    DisplayController.popUpTaskModal();
+  }
+
   const getProjectId = function (target) {
     return target.getAttribute('data-project-index');
   }
 
   const listenEvents = function () {
     const addProjectBtn = document.querySelector('.add-project-btn');
+    const addTaskBtn = document.querySelector('.add-task-btn');
 
     document.addEventListener('click', (e) => {
       const targetClasslist = e.target.classList;
@@ -100,11 +106,11 @@ const DOMHandler = (function() {
     })
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
+    addTaskBtn.addEventListener('click', triggerAddTaskBtn)
   }
 
   const init = function initApp() {
-    DisplayController.renderProjectTabs(myProjects);
-    DisplayController.renderTasks(myProjects[currentProjectId]);
+    DisplayController.render(myProjects, currentProjectId);
     listenEvents();
   }
 

@@ -24,6 +24,12 @@ const DisplayController = (function() {
     body.appendChild(elementsModels.editProjectModal(inputText));
   }
 
+  const popUpTaskModal = function () {
+    if(checkExistingModal()) return;
+    const body = document.body;
+    body.appendChild(elementsModels.addTaskModal());
+  }
+
   const exitModal = function () {
     const child = document.querySelector('.modal');
     child.remove();
@@ -57,15 +63,23 @@ const DisplayController = (function() {
     })
   }
 
+  const render = function renderAll (projects, currentProjectId) {
+    renderProjectTabs(projects);
+    renderTasks(projects[currentProjectId]);
+    toggleProjectTab(currentProjectId);
+  }
+
   return {
     clearChildNodes,
     checkExistingModal,
     popUpEditProjectModal,
     popUpProjectModal,
+    popUpTaskModal,
     exitModal,
     renderProjectTabs,
     renderTasks,
-    toggleProjectTab
+    toggleProjectTab,
+    render
   }
 })();
 
