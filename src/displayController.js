@@ -38,6 +38,9 @@ const DisplayController = (function() {
   const renderProjectTabs = function (projects) {
     const projectsWrapper = document.querySelector('.projects-wrapper');
     clearChildNodes(projectsWrapper);
+
+    if(projects.length === 0) return;
+
     projects.forEach(project => {
       projectsWrapper.appendChild(elementsModels.projectTabModel(project.name, projects.indexOf(project)));
     });
@@ -45,9 +48,12 @@ const DisplayController = (function() {
 
   const renderTasks = function renderTasksOfCurrentProject (project) {
     const tasksContainer = document.querySelector('.tasks-container');
+    clearChildNodes(tasksContainer);
+
+    if(!project) return;
+
     const tasks = project.tasks;
 
-    clearChildNodes(tasksContainer);
     tasks.forEach(task => {
       tasksContainer.appendChild(elementsModels.taskModel(task, tasks.indexOf(task)));
     })
