@@ -142,7 +142,7 @@ const elementsModels = {
   },
 
   addTaskModal() {
-    const taskModal = document.createElement('div');
+    const taskModal = document.createElement('form');
     taskModal.classList.add('modal', 'add-task-modal');
     
     // header
