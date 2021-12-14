@@ -15,8 +15,8 @@ const DOMHandler = (function() {
     DisplayController.popUpProjectModal();
   }
 
-  const triggerDelProjectBtn = function (e) {
-    const projectId = e.target.parentNode.getAttribute('data-project-index');
+  const triggerDelProjectBtn = function (target) {
+    const projectId = target.parentNode.getAttribute('data-project-index');
     if(projectId == currentProjectId) currentProjectId = 0;
     ProjectManager.removeProject(projectId);
     DisplayController.render(myProjects, currentProjectId);
@@ -34,8 +34,8 @@ const DOMHandler = (function() {
     DisplayController.render(myProjects, currentProjectId);
   }
 
-  const triggerEditProjectBtn = function (e) {
-    const targetParent = e.target.parentNode;
+  const triggerEditProjectBtn = function (target) {
+    const targetParent = target.parentNode;
 
     projectIdBeingEdited = getProjectId(targetParent);
     DisplayController.popUpEditProjectModal(myProjects[projectIdBeingEdited].name);
@@ -49,8 +49,8 @@ const DOMHandler = (function() {
     DisplayController.render(myProjects, currentProjectId);
   }
 
-  const triggerSelectedProject = function (e) {
-    const projectTab = e.target.parentNode;
+  const triggerSelectedProject = function (target) {
+    const projectTab = target.parentNode;
     currentProjectId = getProjectId(projectTab);
 
     DisplayController.renderTasks(myProjects[currentProjectId]);
@@ -87,13 +87,13 @@ const DOMHandler = (function() {
 
     document.addEventListener('click', (e) => {
       const targetClasslist = e.target.classList;
-      if(targetClasslist.contains('delete-project-btn')) triggerDelProjectBtn(e);
+      if(targetClasslist.contains('delete-project-btn')) triggerDelProjectBtn(e.target);
 
-      else if(targetClasslist.contains('edit-project')) triggerEditProjectBtn(e);
+      else if(targetClasslist.contains('edit-project')) triggerEditProjectBtn(e.target);
 
       else if(targetClasslist.contains('exit-btn')) triggerExitBtn();
 
-      else if(targetClasslist.contains('project-name')) triggerSelectedProject(e);
+      else if(targetClasslist.contains('project-name')) triggerSelectedProject(e.target);
     })
 
     document.addEventListener('submit', (e) => {
