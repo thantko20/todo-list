@@ -11,22 +11,6 @@ const DOMHandler = (function() {
   let projectIdBeingEdited = null;
   let taskIdBeingEdited = null;
 
-  ProjectManager.addProject(ProjectManager.createProject('text'));
-  
-  let taskProperties = {
-    title: 'fjdlkas',
-    description: 'dfsadfahg',
-    dueDate: '12/12/2021',
-    priority: 'High',
-    finishedStatus: true,
-  }
-
-  let task = TaskManager.createTask(taskProperties);
-  ProjectManager.addTask(0, task);
-  ProjectManager.addTask(0, task);
-  ProjectManager.addTask(0, task);
-  ProjectManager.addTask(0, task);
-
   const triggerAddProjectBtn = function () {
     DisplayController.popUpProjectModal();
   }
@@ -77,6 +61,22 @@ const DOMHandler = (function() {
     DisplayController.popUpTaskModal();
   }
 
+  const triggerSaveTaskBtn = function (form) {
+    const taskInfo = {
+      title: form.title.value,
+      description: form.description.value,
+      dueDate: form.date.value,
+      priority: form.priority.value,
+      finishedStatus: form.status.value == 'YES' ? true : false
+    }
+
+    let newTask = TaskManager.createTask(taskInfo);
+
+    ProjectManager.addTask(currentProjectId, newTask);
+    DisplayController.exitModal();
+    DisplayController.render(myProjects, currentProjectId);
+  }
+
   const getProjectId = function (target) {
     return target.getAttribute('data-project-index');
   }
@@ -103,6 +103,8 @@ const DOMHandler = (function() {
       if(targetClasslist.contains('add-project-modal')) triggerSaveProjectBtn(e.target);
 
       else if(targetClasslist.contains('edit-project-modal')) triggerChangeNameBtn(e.target);
+
+      else if(targetClasslist.contains('add-task-modal')) triggerSaveTaskBtn(e.target);
     });
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
