@@ -158,10 +158,9 @@ const elementsModels = {
 
     modalHeader.append(headerText, exitBtn);
 
-    // TITLE
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('input-container');
+    taskModal.appendChild(modalHeader);
 
+    // TITLE
     const titleLabel = document.createElement('label');
     titleLabel.setAttribute('for', 'title');
     titleLabel.textContent = 'Title: ';
@@ -170,12 +169,12 @@ const elementsModels = {
     titleInput.type = 'text';
     titleInput.placeholder = 'title';
     titleInput.id = 'title';
+    titleInput.name = 'title';
+    titleInput.required = true;
 
-    titleContainer.append(titleLabel, titleInput);
+    taskModal.append(titleLabel, titleInput);
 
     // DESCRIPTION
-    const descriptionContainer = document.createElement('div');
-    descriptionContainer.classList.add('input-container');
 
     const descriptionLabel = document.createElement('label');
     descriptionLabel.setAttribute('for', 'description');
@@ -184,13 +183,83 @@ const elementsModels = {
     const descriptionInput = document.createElement('textarea');
     descriptionInput.placeholder = 'description';
     descriptionInput.id = 'description';
-    descriptionInput.cols = '8'
+    descriptionInput.cols = '8';
+    descriptionInput.name = 'description'
+    descriptionInput.required = true;
 
-    descriptionContainer.append(descriptionLabel, descriptionInput);
+    taskModal.append(descriptionLabel, descriptionInput);
 
+    // Due Date
 
+    const dueDateLabel = document.createElement('label');
+    dueDateLabel.setAttribute('for', 'due-date');
+    dueDateLabel.textContent = 'Due Date:';
 
-    taskModal.append(modalHeader, titleContainer, descriptionContainer);
+    const dueDateInput = document.createElement('input');
+    dueDateInput.type = 'date';
+    dueDateInput.id = 'due-date';
+    dueDateInput.name = 'date';
+    dueDateInput.required = true;
+
+    taskModal.append(dueDateLabel, dueDateInput);
+
+    // Priority
+
+    const priorityLabel = document.createElement('label');
+    priorityLabel.setAttribute('for', 'priority');
+    priorityLabel.textContent = 'Priority:';
+
+    const priorityInput = document.createElement('select'); // Select Element
+    priorityInput.id = 'priority';
+    priorityInput.name = 'priority';
+
+    const lowOption = document.createElement('option');
+    lowOption.value = 'LOW';
+    lowOption.textContent = 'Low';
+    lowOption.selected = true;
+
+    const medOption = document.createElement('option');
+    medOption.value = 'MED';
+    medOption.textContent = 'Med';
+
+    const highOption = document.createElement('option');
+    highOption.value = 'HIGH';
+    highOption.textContent = 'High';
+
+    priorityInput.append(lowOption, medOption, highOption);
+
+    taskModal.append(priorityLabel, priorityInput)
+
+    // finishedStatus
+
+    const statusLabel = document.createElement('label');
+    statusLabel.setAttribute('for', 'finished-status');
+    statusLabel.textContent = 'Finished?:'
+
+    const statusInput = document.createElement('select');
+    statusInput.id = 'finished-status';
+    statusInput.name = 'status';
+
+    const noOption = document.createElement('option');
+    noOption.value = 'NO';
+    noOption.textContent = 'No';
+    noOption.selected = true;
+
+    const yesOption = document.createElement('option');
+    yesOption.value = 'YES';
+    yesOption.textContent = 'Yes';
+
+    statusInput.append(noOption, yesOption);
+
+    taskModal.append(statusLabel, statusInput);
+
+    // Save Button
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'submit';
+    saveBtn.classList.add('save', 'save-task');
+    saveBtn.textContent = 'Save';
+
+    taskModal.appendChild(saveBtn);
 
     return taskModal;
   }
