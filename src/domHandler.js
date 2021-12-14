@@ -42,14 +42,10 @@ const DOMHandler = (function() {
     DisplayController.exitModal();
   }
 
-  const triggerSaveProjectBtn = function (e) {
-    e.preventDefault();
-    const input = document.querySelector('.project-name-input');
-    const projectName = input.value;
-    if(projectName.length === 0){
-      alert("Can't be empty field!");
-      return;
-    }
+  const triggerSaveProjectBtn = function (form) {
+    const projectName = form.pname.value;
+    console.log(projectName)
+
     DisplayController.exitModal();
     ProjectManager.addProject(ProjectManager.createProject(projectName));
     DisplayController.render(myProjects, currentProjectId);
@@ -98,15 +94,20 @@ const DOMHandler = (function() {
 
       else if(targetClasslist.contains('exit-btn')) triggerExitBtn();
 
-      else if(targetClasslist.contains('save-project')) triggerSaveProjectBtn(e);
-
       else if(targetClasslist.contains('edit-name')) triggerChangeNameBtn(e);
 
       else if(targetClasslist.contains('project-name')) triggerSelectedProject(e);
     })
 
+    document.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const targetClasslist = e.target.classList;
+
+      if(targetClasslist.contains('add-project-modal')) triggerSaveProjectBtn(e.target);
+    });
+
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
-    addTaskBtn.addEventListener('click', triggerAddTaskBtn)
+    addTaskBtn.addEventListener('click', triggerAddTaskBtn);
   }
 
   const init = function initApp() {

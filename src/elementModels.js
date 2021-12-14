@@ -68,10 +68,10 @@ const elementsModels = {
   addProjectModal() {
     const projectModal = document.createElement('form');
     projectModal.setAttribute('action', '#');
-    projectModal.classList.add('modal');
+    projectModal.classList.add('modal', 'add-project-modal');
 
     const projectModalHeader = document.createElement('div');
-    projectModalHeader.classList.add('project-modal-header');
+    projectModalHeader.classList.add('modal-header');
 
     const headerText = document.createElement('div');
     headerText.textContent = 'Enter Project Name';
@@ -88,6 +88,8 @@ const elementsModels = {
     input.type = 'text';
     input.placeholder = 'project name...';
     input.classList.add('project-name-input');
+    input.required = true;
+    input.name = 'pname'
 
     const saveBtn = document.createElement('button');
     saveBtn.type = 'submit';
@@ -107,7 +109,7 @@ const elementsModels = {
     projectModal.classList.add('modal');
 
     const projectModalHeader = document.createElement('div');
-    projectModalHeader.classList.add('project-modal-header');
+    projectModalHeader.classList.add('modal-header');
 
     const headerText = document.createElement('div');
     headerText.textContent = 'Edit Project Name';
@@ -135,6 +137,60 @@ const elementsModels = {
     projectModal.append(projectModalHeader, inputPart);
 
     return projectModal;
+  },
+
+  addTaskModal() {
+    const taskModal = document.createElement('div');
+    taskModal.classList.add('modal', 'add-task-modal');
+    
+    // header
+    const modalHeader = document.createElement('div');
+    modalHeader.classList.add('modal-header')
+
+    const headerText = document.createElement('div');
+    headerText.textContent = 'Add Task';
+
+    const exitBtn = document.createElement('button');
+    exitBtn.classList.add('exit-btn');
+    exitBtn.innerHTML = '&times;';
+
+    modalHeader.append(headerText, exitBtn);
+
+    // TITLE
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('input-container');
+
+    const titleLabel = document.createElement('label');
+    titleLabel.setAttribute('for', 'title');
+    titleLabel.textContent = 'Title: ';
+
+    const titleInput = document.createElement('input');
+    titleInput.type = 'text';
+    titleInput.placeholder = 'title';
+    titleInput.id = 'title';
+
+    titleContainer.append(titleLabel, titleInput);
+
+    // DESCRIPTION
+    const descriptionContainer = document.createElement('div');
+    descriptionContainer.classList.add('input-container');
+
+    const descriptionLabel = document.createElement('label');
+    descriptionLabel.setAttribute('for', 'description');
+    descriptionLabel.textContent = 'Description: ';
+
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.placeholder = 'description';
+    descriptionInput.id = 'description';
+    descriptionInput.cols = '8'
+
+    descriptionContainer.append(descriptionLabel, descriptionInput);
+
+
+
+    taskModal.append(modalHeader, titleContainer, descriptionContainer);
+
+    return taskModal;
   }
 }
 
