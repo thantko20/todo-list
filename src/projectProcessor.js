@@ -1,7 +1,8 @@
 import Project from "./project";
+import LocalStorageHandler from "./localStorageHandler";
 
 const ProjectManager = (function() {
-  let myProjects = [];
+  let myProjects = LocalStorageHandler.loadProjects() || [];
 
   const getProjects = function getMyProjects() {
     return myProjects;

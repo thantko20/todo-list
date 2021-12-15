@@ -2,8 +2,7 @@ import './style/style.css';
 import TaskManager from './taskProcessor';
 import ProjectManager from './projectProcessor';
 import DisplayController from './displayController';
-import { format } from 'date-fns';
-import Task from './task';
+import LocalStorageHandler from './localStorageHandler';
 
 const DOMHandler = (function() {
   let myProjects = ProjectManager.getProjects();
@@ -20,6 +19,7 @@ const DOMHandler = (function() {
     const projectId = getIdOf(target, 'data-project-index');
     if(projectId == currentProjectId) currentProjectId = 0;
     ProjectManager.removeProject(projectId);
+    LocalStorageHandler.saveProjects(myProjects);
     DisplayController.render(myProjects, currentProjectId);
   }
 
@@ -32,6 +32,7 @@ const DOMHandler = (function() {
 
     DisplayController.exitModal();
     ProjectManager.addProject(ProjectManager.createProject(projectName));
+    LocalStorageHandler.saveProjects(myProjects);
     DisplayController.render(myProjects, currentProjectId);
   }
 
@@ -44,6 +45,7 @@ const DOMHandler = (function() {
     const projectName = form.pname.value;
 
     ProjectManager.editProjectName(projectIdBeingEdited, projectName);
+    LocalStorageHandler.saveProjects(myProjects);
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
   }
@@ -73,6 +75,7 @@ const DOMHandler = (function() {
     let newTask = TaskManager.createTask(taskInfo);
 
     ProjectManager.addTask(currentProjectId, newTask);
+    LocalStorageHandler.saveProjects(myProjects);
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
   }
@@ -83,6 +86,7 @@ const DOMHandler = (function() {
 
     const checkStatus = target.checked;
     TaskManager.toggleStatus(currentProject.tasks[taskId], checkStatus);
+    LocalStorageHandler.saveProjects(myProjects);
 
     DisplayController.render(myProjects, currentProjectId);
   }
@@ -107,13 +111,14 @@ const DOMHandler = (function() {
     let task = myProjects[currentProjectId].tasks[taskIdBeingEdited];
 
     TaskManager.editTask(task, taskInfo);
+    LocalStorageHandler.saveProjects(myProjects);
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
   }
 
   const triggerDelTaskBtn = function () {
-    console.log('clicked');
     ProjectManager.removeTask(currentProjectId, taskIdBeingEdited);
+    LocalStorageHandler.saveProjects(myProjects);
 
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
