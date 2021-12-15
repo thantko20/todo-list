@@ -3,7 +3,7 @@
 }
 
 :root {
-  --darkened-color: rgb(149, 225, 255);
+  --darkened-color: rgb(166, 230, 255);
   --pale-color: rgb(215, 241, 251);
 }
 
@@ -97,12 +97,22 @@ body {
   cursor: pointer;
 }
 
+.save-task {
+  align-self: center;
+}
+
 .expand-icon:hover {
   color: red;
 }
 
 .task > div {
   direction: ltr;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .strikethrough {
@@ -150,6 +160,15 @@ body {
 }
 
 .save {
+  padding: 6px 10px;
+  background-color: rgb(118, 255, 118);
+}
+
+.save:hover {
+  background-color: rgb(86, 189, 86);
+}
+
+.save-project {
   margin-left: 6px;
 }
 
@@ -178,6 +197,16 @@ img {
   color: #000;
 }
 
+.delete-task:hover {
+  background-color: red;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
 .modal {
   top: 50%;
   left: 50%;
@@ -193,7 +222,7 @@ img {
   border: 1px solid #000;
 }
 
-.project-modal-header {
+.modal-header {
   display: flex;
   justify-content: space-between;
 }

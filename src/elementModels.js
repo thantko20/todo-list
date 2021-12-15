@@ -262,6 +262,154 @@ const elementsModels = {
     taskModal.appendChild(saveBtn);
 
     return taskModal;
+  },
+
+  editTaskModal(task) {
+    const taskModal = document.createElement('form');
+    taskModal.classList.add('modal', 'edit-task-modal');
+    
+    // header
+    const modalHeader = document.createElement('div');
+    modalHeader.classList.add('modal-header')
+
+    const headerText = document.createElement('div');
+    headerText.textContent = 'Edit Task';
+
+    const exitBtn = document.createElement('button');
+    exitBtn.classList.add('exit-btn');
+    exitBtn.innerHTML = '&times;';
+
+    modalHeader.append(headerText, exitBtn);
+
+    taskModal.appendChild(modalHeader);
+
+    // TITLE
+    const titleLabel = document.createElement('label');
+    titleLabel.setAttribute('for', 'title');
+    titleLabel.textContent = 'Title: ';
+
+    const titleInput = document.createElement('input');
+    titleInput.type = 'text';
+    titleInput.value = task.title;
+    titleInput.id = 'title';
+    titleInput.name = 'title';
+    titleInput.required = true;
+
+    taskModal.append(titleLabel, titleInput);
+
+    // DESCRIPTION
+
+    const descriptionLabel = document.createElement('label');
+    descriptionLabel.setAttribute('for', 'description');
+    descriptionLabel.textContent = 'Description: ';
+
+    const descriptionInput = document.createElement('textarea');
+    descriptionInput.value = task.description;
+    descriptionInput.id = 'description';
+    descriptionInput.cols = '8';
+    descriptionInput.name = 'description'
+    descriptionInput.required = true;
+
+    taskModal.append(descriptionLabel, descriptionInput);
+
+    // Due Date
+
+    const dueDateLabel = document.createElement('label');
+    dueDateLabel.setAttribute('for', 'due-date');
+    dueDateLabel.textContent = 'Due Date:';
+
+    const dueDateInput = document.createElement('input');
+    dueDateInput.type = 'date';
+    dueDateInput.value = task.dueDate;
+    dueDateInput.id = 'due-date';
+    dueDateInput.name = 'date';
+    dueDateInput.required = true;
+
+    taskModal.append(dueDateLabel, dueDateInput);
+
+    // Priority
+
+    const priorityLabel = document.createElement('label');
+    priorityLabel.setAttribute('for', 'priority');
+    priorityLabel.textContent = 'Priority:';
+
+    const priorityInput = document.createElement('select'); // Select Element
+    priorityInput.id = 'priority';
+    priorityInput.name = 'priority';
+
+    const lowOption = document.createElement('option');
+    lowOption.value = 'LOW';
+    lowOption.textContent = 'Low';
+
+    const medOption = document.createElement('option');
+    medOption.value = 'MED';
+    medOption.textContent = 'Med';
+
+    const highOption = document.createElement('option');
+    highOption.value = 'HIGH';
+    highOption.textContent = 'High';
+
+    switch (task.priority) {
+      case lowOption.value:
+        lowOption.selected = true;
+        break;
+
+      case medOption.value:
+        medOption.selected = true;
+      
+      case highOption.value:
+        highOption.selected = true;
+    }
+
+    priorityInput.append(lowOption, medOption, highOption);
+
+    taskModal.append(priorityLabel, priorityInput)
+
+    // finishedStatus
+
+    const statusLabel = document.createElement('label');
+    statusLabel.setAttribute('for', 'finished-status');
+    statusLabel.textContent = 'Finished?:'
+
+    const statusInput = document.createElement('select');
+    statusInput.id = 'finished-status';
+    statusInput.name = 'status';
+
+    const noOption = document.createElement('option');
+    noOption.value = 'NO';
+    noOption.textContent = 'No';
+
+    const yesOption = document.createElement('option');
+    yesOption.value = 'YES';
+    yesOption.textContent = 'Yes';
+
+    task.finishedStatus ? yesOption.selected = true : noOption.selected = true;
+
+    statusInput.append(noOption, yesOption);
+
+    taskModal.append(statusLabel, statusInput);
+
+    // Save Button
+    const saveBtn = document.createElement('button');
+    saveBtn.type = 'submit';
+    saveBtn.classList.add('save', 'save-task');
+    saveBtn.textContent = 'Save';
+
+    // Delete Button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
+    deleteBtn.classList.add('save', 'delete-task');
+    deleteBtn.textContent = 'Delete';
+
+    // Buttons Container
+    const container = document.createElement('div');
+    container.classList.add('btn-container');
+
+    container.append(saveBtn, deleteBtn);
+
+    taskModal.appendChild(container);
+
+    return taskModal;
   }
 }
 

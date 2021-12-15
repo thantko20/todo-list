@@ -30,6 +30,13 @@ const DisplayController = (function() {
     body.appendChild(elementsModels.addTaskModal());
   }
 
+  const popUpEditTaskModal = function (task) {
+    if(checkExistingModal()) return;
+
+    const body = document.body;
+    body.appendChild(elementsModels.editTaskModal(task));
+  }
+
   const exitModal = function () {
     const child = document.querySelector('.modal');
     child.remove();
@@ -81,6 +88,7 @@ const DisplayController = (function() {
     popUpEditProjectModal,
     popUpProjectModal,
     popUpTaskModal,
+    popUpEditTaskModal,
     exitModal,
     renderProjectTabs,
     renderTasks,

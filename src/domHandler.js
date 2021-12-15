@@ -86,6 +86,15 @@ const DOMHandler = (function() {
     DisplayController.render(myProjects, currentProjectId);
   }
 
+  const triggerExpandTaskBtn = function (target) {
+    console.log('clicked');
+    taskIdBeingEdited = getIdOf(target, 'data-task-index');
+
+    const task = myProjects[currentProjectId].tasks[taskIdBeingEdited];
+
+    DisplayController.popUpEditTaskModal(task);
+  }
+
   const getIdOf = function (curr, attrName) {
     while(!curr.hasAttribute(attrName)) curr = curr.parentNode;
 
@@ -107,6 +116,8 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('project-name')) triggerSelectedProject(e.target);
 
       else if(targetClasslist.contains('finished-status')) triggerFinishedStatusBtn(e.target);
+
+      else if(targetClasslist.contains('expand-btn')) triggerExpandTaskBtn(e.target);
     })
 
     document.addEventListener('submit', (e) => {
