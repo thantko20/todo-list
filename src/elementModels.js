@@ -45,7 +45,7 @@ const elementsModels = {
     task.finishedStatus ? title.classList.add('strikethrough') : title.classList.remove('strikethrough');
 
     const priority = document.createElement('div');
-    priority.classList.add('priority', task.priority);
+    priority.classList.add('priority', task.priority.toLowerCase());
     priority.textContent = task.priority;
 
     const dueDate = document.createElement('div');
