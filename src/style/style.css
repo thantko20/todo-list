@@ -231,7 +231,8 @@ img {
   gap: 12px;
 
   background-color: var(--darkened-color);
-  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.061);
 }
 
 .modal-header {
