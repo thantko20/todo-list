@@ -24,7 +24,7 @@ const ProjectManager = (function() {
   }
 
   const removeTask = function (projectId, taskId) {
-    project.tasks.splice(taskId, 1);
+    myProjects[projectId].tasks.splice(taskId, 1);
   }
 
   const removeProject = function (projectId) {
