@@ -88,7 +88,6 @@ const DOMHandler = (function() {
   }
 
   const triggerExpandTaskBtn = function (target) {
-    console.log('clicked');
     taskIdBeingEdited = getIdOf(target, 'data-task-index');
 
     const task = myProjects[currentProjectId].tasks[taskIdBeingEdited];
@@ -108,6 +107,14 @@ const DOMHandler = (function() {
     let task = myProjects[currentProjectId].tasks[taskIdBeingEdited];
 
     TaskManager.editTask(task, taskInfo);
+    DisplayController.exitModal();
+    DisplayController.render(myProjects, currentProjectId);
+  }
+
+  const triggerDelTaskBtn = function () {
+    console.log('clicked');
+    ProjectManager.removeTask(currentProjectId, taskIdBeingEdited);
+
     DisplayController.exitModal();
     DisplayController.render(myProjects, currentProjectId);
   }
@@ -135,6 +142,8 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('finished-status')) triggerFinishedStatusBtn(e.target);
 
       else if(targetClasslist.contains('expand-btn')) triggerExpandTaskBtn(e.target);
+
+      else if(targetClasslist.contains('delete-task')) triggerDelTaskBtn(e.target);
     })
 
     document.addEventListener('submit', (e) => {
@@ -148,8 +157,6 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('add-task-modal')) triggerSaveTaskBtn(e.target);
 
       else if(targetClasslist.contains('edit-task-modal')) triggerChangeTaskBtn(e.target);
-
-      else if(targetClasslist.contains('delete-task')) triggerDelTaskBtn(e.target);
     });
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
