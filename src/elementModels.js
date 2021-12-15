@@ -356,9 +356,11 @@ const elementsModels = {
 
       case medOption.value:
         medOption.selected = true;
+        break;
       
       case highOption.value:
         highOption.selected = true;
+        break;
     }
 
     priorityInput.append(lowOption, medOption, highOption);
