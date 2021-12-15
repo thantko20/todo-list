@@ -22,6 +22,7 @@ View on [github pages](https://thantko20.github.io/todo-list/).
 
 ## Weaknesses
 
-1. Won't be able to view tasks based on date/time.
-2. Users may not find the design very eye-catching.
-3. As for code, I did make as many modules as I could. But I'm willing to improve it.
+1. **NOT RESPONSIVE**. I'll defo come back to this project as soon as I've learnt RWD.
+2. Won't be able to view tasks based on date/time.
+3. Users may not find the design very eye-catching.
+4. As for code, I did make as many modules as I could. But I'm willing to improve it.
