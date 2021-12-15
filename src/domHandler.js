@@ -58,6 +58,8 @@ const DOMHandler = (function() {
   }
 
   const triggerAddTaskBtn = function () {
+    if(!myProjects[currentProjectId]) return;
+
     DisplayController.popUpTaskModal();
   }
 
