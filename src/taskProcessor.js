@@ -16,9 +16,14 @@ const TaskManager = (function() {
     task.finishedStatus = finishedStatus;
   }
 
+  const toggleStatus = function toggleFinishedStatus(task, status) {
+    task.finishedStatus = status;
+  }
+
   return {
     createTask,
-    editTask
+    editTask,
+    toggleStatus
   }
 })();
 
