@@ -3,6 +3,7 @@ import TaskManager from './taskProcessor';
 import ProjectManager from './projectProcessor';
 import DisplayController from './displayController';
 import { format } from 'date-fns';
+import Task from './task';
 
 const DOMHandler = (function() {
   let myProjects = ProjectManager.getProjects();
@@ -95,6 +96,22 @@ const DOMHandler = (function() {
     DisplayController.popUpEditTaskModal(task);
   }
 
+  const triggerChangeTaskBtn = function (target) {
+    const taskInfo = {
+      title: target.title.value,
+      description: target.description.value,
+      dueDate: target.date.value,
+      priority: target.priority.value,
+      finishedStatus: target.status.value === 'YES' ? true : false
+    }
+
+    let task = myProjects[currentProjectId].tasks[taskIdBeingEdited];
+
+    TaskManager.editTask(task, taskInfo);
+    DisplayController.exitModal();
+    DisplayController.render(myProjects, currentProjectId);
+  }
+
   const getIdOf = function (curr, attrName) {
     while(!curr.hasAttribute(attrName)) curr = curr.parentNode;
 
@@ -129,6 +146,10 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('edit-project-modal')) triggerChangeNameBtn(e.target);
 
       else if(targetClasslist.contains('add-task-modal')) triggerSaveTaskBtn(e.target);
+
+      else if(targetClasslist.contains('edit-task-modal')) triggerChangeTaskBtn(e.target);
+
+      else if(targetClasslist.contains('delete-task')) triggerDelTaskBtn(e.target);
     });
 
     addProjectBtn.addEventListener('click', triggerAddProjectBtn);
