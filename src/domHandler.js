@@ -16,7 +16,7 @@ const DOMHandler = (function() {
   }
 
   const triggerDelProjectBtn = function (target) {
-    const projectId = target.parentNode.getAttribute('data-project-index');
+    const projectId = getIdOf(target, 'data-project-index');
     if(projectId == currentProjectId) currentProjectId = 0;
     ProjectManager.removeProject(projectId);
     DisplayController.render(myProjects, currentProjectId);
@@ -35,9 +35,7 @@ const DOMHandler = (function() {
   }
 
   const triggerEditProjectBtn = function (target) {
-    const targetParent = target.parentNode;
-
-    projectIdBeingEdited = getProjectId(targetParent);
+    projectIdBeingEdited = getIdOf(target, 'data-project-index');
     DisplayController.popUpEditProjectModal(myProjects[projectIdBeingEdited].name);
   }
 
@@ -50,8 +48,7 @@ const DOMHandler = (function() {
   }
 
   const triggerSelectedProject = function (target) {
-    const projectTab = target.parentNode;
-    currentProjectId = getProjectId(projectTab);
+    currentProjectId = getIdOf(target, 'data-project-index');
 
     DisplayController.renderTasks(myProjects[currentProjectId]);
     DisplayController.toggleProjectTab(currentProjectId);
@@ -79,8 +76,20 @@ const DOMHandler = (function() {
     DisplayController.render(myProjects, currentProjectId);
   }
 
-  const getProjectId = function (target) {
-    return target.getAttribute('data-project-index');
+  const triggerFinishedStatusBtn = function (target) {
+    const taskId = getIdOf(target, 'data-task-index');
+    const currentProject = myProjects[currentProjectId];
+
+    const checkStatus = target.checked;
+    TaskManager.toggleStatus(currentProject.tasks[taskId], checkStatus);
+
+    DisplayController.render(myProjects, currentProjectId);
+  }
+
+  const getIdOf = function (curr, attrName) {
+    while(!curr.hasAttribute(attrName)) curr = curr.parentNode;
+
+    return curr.getAttribute(attrName);
   }
 
   const listenEvents = function () {
@@ -96,6 +105,8 @@ const DOMHandler = (function() {
       else if(targetClasslist.contains('exit-btn')) triggerExitBtn();
 
       else if(targetClasslist.contains('project-name')) triggerSelectedProject(e.target);
+
+      else if(targetClasslist.contains('finished-status')) triggerFinishedStatusBtn(e.target);
     })
 
     document.addEventListener('submit', (e) => {
